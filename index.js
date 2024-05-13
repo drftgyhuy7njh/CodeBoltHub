@@ -1,13 +1,10 @@
-const bubbleSortOptimized = (arr) => {
-  let swapped;
-  do {
-    swapped = false;
-    for (let i = 0; i < arr.length - 1; i++) {
-      if (arr[i] > arr[i + 1]) {
-        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
-        swapped = true;
-      }
+function coinChange(coins, amount) {
+  const dp = new Array(amount + 1).fill(Infinity);
+  dp[0] = 0;
+  for (const coin of coins) {
+    for (let i = coin; i <= amount; i++) {
+      dp[i] = Math.min(dp[i], dp[i - coin] + 1);
     }
-  } while (swapped);
-  return arr;
-};
+  }
+  return dp[amount] === Infinity ? -1 : dp[amount];
+}
